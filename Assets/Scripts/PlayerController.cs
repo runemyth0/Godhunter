@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
 	void Update ()
 	{
-		StartCoroutine (PyroAttack());
+		StartCoroutine (PyroAttack ());
 		StartCoroutine (MeleeAttack ());
 	}
 
@@ -56,7 +56,8 @@ public class PlayerController : MonoBehaviour
 			meleeAttack.SetActive (true); // Activates the attack.
 			yield return new WaitForSeconds (meleeCooldown / 3);
 			meleeAttack.SetActive (false); // Deactivates the attack.
+			yield return new WaitForSeconds (meleeCooldown); // Attack cooldown.
 		}
-		yield return new WaitForSeconds (meleeCooldown); // Attack cooldown.
 	}
+
 }
