@@ -9,29 +9,29 @@ public class PlayerController : MonoBehaviour
 	public float meleeCooldown;
 
 	private float nextPyroAttack;
-	private float nextMeleeAttack;
 
 	public GameObject pyroAttack;
 	public Transform pyroSpawn;
+
+	public GameObject meleeAttack;
 
 	private Rigidbody2D rb;
 
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		meleeAttack.SetActive (false);
 	}
 
 	void Update ()
 	{
 		if (Input.GetButtonDown("Fire2") && Time.time > nextPyroAttack)
 		{
+			nextPyroAttack = Time.time + pyroCooldown;
 			PyroAttack();
 		}
 
-		if (Input.GetButtonDown("Fire1") && Time.time > nextMeleeAttack)
-		{
-			MeleeAttack();
-		}
+		StartCoroutine (MeleeAttack ());
 	}
 
 	void FixedUpdate ()
@@ -47,16 +47,19 @@ public class PlayerController : MonoBehaviour
 // Ranged attack, planned to stun enemies (eventually).
 	void PyroAttack ()
 	{
-		nextPyroAttack = Time.time + pyroCooldown;
 		Instantiate(pyroAttack,pyroSpawn.position,pyroSpawn.rotation);
 	}
 
 
 // Close range attack, hits all zones.
-	void MeleeAttack ()
+	IEnumerator MeleeAttack ()
 	{
-		nextMeleeAttack = Time.time + meleeCooldown;
-
-		Debug.Log ("Melee Attack Successful");
+		if (Input.GetButtonDown ("Fire1")) // Checks for when you press the left mouse button.
+		{
+			meleeAttack.SetActive (true); // Activates the attack.
+			yield return new WaitForSeconds (meleeCooldown / 3);
+			meleeAttack.SetActive (false); // Deactivates the attack.
+		}
+		yield return new WaitForSeconds (meleeCooldown); // Attack cooldown.
 	}
 }
