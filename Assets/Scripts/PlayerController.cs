@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour
 	public float pyroCooldown;
 	public float meleeCooldown;
 
-	private float nextPyroAttack;
-
 	public GameObject pyroAttack;
 	public Transform pyroSpawn;
 
@@ -25,12 +23,7 @@ public class PlayerController : MonoBehaviour
 
 	void Update ()
 	{
-		if (Input.GetButtonDown("Fire2") && Time.time > nextPyroAttack)
-		{
-			nextPyroAttack = Time.time + pyroCooldown;
-			PyroAttack();
-		}
-
+		StartCoroutine (PyroAttack());
 		StartCoroutine (MeleeAttack ());
 	}
 
@@ -45,16 +38,20 @@ public class PlayerController : MonoBehaviour
 // Attack Functions
 
 // Ranged attack, planned to stun enemies (eventually).
-	void PyroAttack ()
+	IEnumerator PyroAttack ()
 	{
-		Instantiate(pyroAttack,pyroSpawn.position,pyroSpawn.rotation);
+		if (Input.GetButtonDown ("Fire2")) // Checks for when the right mouse button is pressed.
+		{
+			Instantiate(pyroAttack,pyroSpawn.position,pyroSpawn.rotation); // Creates a clone of the pyroAttack game object (set in inspector).
+		}
+		yield return new WaitForSeconds (pyroCooldown); // Attack cooldown.
 	}
 
 
 // Close range attack, hits all zones.
 	IEnumerator MeleeAttack ()
 	{
-		if (Input.GetButtonDown ("Fire1")) // Checks for when you press the left mouse button.
+		if (Input.GetButtonDown ("Fire1")) // Checks for when the left mouse button is pressed.
 		{
 			meleeAttack.SetActive (true); // Activates the attack.
 			yield return new WaitForSeconds (meleeCooldown / 3);
