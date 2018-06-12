@@ -1005,10 +1005,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  pyroCooldown: 1
-  meleeCooldown: 0
+  pyroCooldown: 4
+  meleeCooldown: 1.5
   pyroAttack: {fileID: 1829052526393232, guid: c9efb24ec7bf5c049bf9710b98311965, type: 2}
   pyroSpawn: {fileID: 255626462}
+  meleeAttack: {fileID: 2101532689}
 --- !u!1 &1190690148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1418,12 +1419,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2101532690}
   m_Layer: 0
-  m_Name: PlayerAttack
+  m_Name: PlayerMelee
   m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2101532690
 Transform:
   m_ObjectHideFlags: 0
