@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 	public float meleeCooldown;
 
 	private float nextPyroAttack;
-	private float nextMelee;
+	private float nextMeleeAttack;
 
 	public GameObject pyroAttack;
 	public Transform pyroSpawn;
@@ -27,8 +27,11 @@ public class PlayerController : MonoBehaviour
 		{
 			PyroAttack();
 		}
-		
-		MeleeAttack();
+
+		if (Input.GetButtonDown("Fire1") && Time.time > nextMeleeAttack)
+		{
+			MeleeAttack();
+		}
 	}
 
 	void FixedUpdate ()
@@ -52,15 +55,8 @@ public class PlayerController : MonoBehaviour
 // Close range attack, hits all zones.
 	void MeleeAttack ()
 	{
-		if (Input.GetButtonDown("Fire1") && Time.time > nextMelee)
-			{
-				nextMelee = Time.time + meleeCooldown;
+		nextMeleeAttack = Time.time + meleeCooldown;
 
-				Debug.Log ("Melee Attack Successful");
-			}
+		Debug.Log ("Melee Attack Successful");
 	}
 }
-
-// Code snippet prototype for directional attacks (MONDAY/TUESDAY)
-// private float playerDirection
-//		playerDirection = Input.GetAxis ("Horizontal")

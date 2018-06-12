@@ -6,12 +6,11 @@ public class PyroMover : MonoBehaviour
 {
 	public float speed;
 
-	private Rigidbody2D rb;
+	private Rigidbody rb;
 
 	void Start ()
 	{
-		rb = GetComponent<Rigidbody2D>();
-
+		rb = GetComponent<Rigidbody>();
 		rb.velocity = transform.right * speed;
 	}
 }
