@@ -4,56 +4,46 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-	public float targetRange;
+
+	public float minRange;
+	public float maxRange;
 	public float moveSpeed;
 
-	private bool lifeCheck = true;
+	private float targetDistance;
 
-	private Vector2 playerDist;
+	private Vector2 targetVector;
 
-	private Rigidbody2D rbEnemy;
-	private Rigidbody2D rbTarget;
+	private Rigidbody2D enemy_rb;
+	private Rigidbody2D target_rb;
 
-	private GameObject enemyTarget;
-
-	void Awake ()
-	{
-		rbEnemy = GetComponent<Rigidbody2D>();
-		enemyTarget = GameObject.FindWithTag ("Player");
-		rbTarget = enemyTarget.GetComponent<Rigidbody2D>();
-		playerDist = rbEnemy.position - rbTarget.position;
-	}
+	private GameObject target;
 
 	void Start ()
 	{
-		DetectPlayer (targetRange,moveSpeed,lifeCheck,rbEnemy,playerDist);
+		enemy_rb = GetComponent<Rigidbody2D>();
+		target = GameObject.FindWithTag ("Player");
+		target_rb = target.GetComponent<Rigidbody2D>();
+		targetVector = enemy_rb.position - target_rb.position;
+		targetDistance = targetVector.x;
 	}
 
-	void LateUpdate ()
+	void Update ()
 	{
-		playerDist = rbEnemy.position - rbTarget.position;
-	}
-
-	void DetectPlayer (float range, float speed, bool alive, Rigidbody2D rb, Vector2 dist)
-	{
-		Vector2 dir = dist.normalized;
-
-		while (alive == true)
+		if (targetDistance <= maxRange)
 		{
-			if (dist.magnitude < range)
+			MoveEnemy (moveSpeed, enemy_rb);
+
+			if (targetDistance >= minRange)
 			{
-				enemyMover (speed,rb,dir);
-			}
-			else
-			{
-				enemyMover (0.0f,rb,dir);
+				MoveEnemy (-moveSpeed, enemy_rb);
 			}
 		}
 	}
 
-	void enemyMover (float speed, Rigidbody2D rb, Vector2 dir)
+	void MoveEnemy (float speed, Rigidbody2D rb)
 	{
-		Vector2 dirX = new Vector2 (dir.x,0.0f);
-		rb.velocity = (dirX * speed);
+		Vector2 direction = Vector2.left;
+		rb.velocity = (direction * speed);
 	}
+
 }
