@@ -9,6 +9,7 @@ TagManager:
   - Low
   - Attack
   - Floor
+  - Enemy
   layers:
   - Default
   - TransparentFX
