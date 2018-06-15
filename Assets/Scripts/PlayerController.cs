@@ -5,8 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 	public float moveSpeed;
-	public float pyroCooldown;
 	public float meleeCooldown;
+	public float fireCooldown;
+
+	private	float nextMelee;
+	private float nextFire;
 
 	public GameObject pyroAttack;
 	public Transform pyroSpawn;
@@ -23,8 +26,16 @@ public class PlayerController : MonoBehaviour
 
 	void Update ()
 	{
-		StartCoroutine (PyroAttack ());
-		StartCoroutine (MeleeAttack ());
+		if (Input.GetButtonDown("Fire1") && Time.time > nextMelee)
+		{
+			StartCoroutine (MeleeAttack (meleeCooldown));
+			nextMelee = Time.time + meleeCooldown;
+		}
+		else if (Input.GetButtonDown("Fire2") && Time.time > nextFire)
+		{
+			PyroAttack ();
+			nextFire = Time.time + fireCooldown;
+		}
 	}
 
 	void FixedUpdate ()
@@ -38,26 +49,18 @@ public class PlayerController : MonoBehaviour
 // Attack Functions
 
 // Ranged attack, planned to stun enemies (eventually).
-	IEnumerator PyroAttack ()
+	void PyroAttack ()
 	{
-		if (Input.GetButtonDown ("Fire2")) // Checks for when the right mouse button is pressed.
-		{
-			Instantiate(pyroAttack,pyroSpawn.position,pyroSpawn.rotation); // Creates a clone of the pyroAttack game object (set in inspector).
-		}
-		yield return new WaitForSeconds (pyroCooldown); // Attack cooldown.
+		Instantiate(pyroAttack,pyroSpawn.position,pyroSpawn.rotation); // Creates a clone of the pyroAttack game object (set in inspector).
 	}
 
-
 // Close range attack, hits all zones.
-	IEnumerator MeleeAttack ()
+	IEnumerator MeleeAttack (float cooldown)
 	{
-		if (Input.GetButtonDown ("Fire1")) // Checks for when the left mouse button is pressed.
-		{
-			meleeAttack.SetActive (true); // Activates the attack.
-			yield return new WaitForSeconds (meleeCooldown / 3);
-			meleeAttack.SetActive (false); // Deactivates the attack.
-			yield return new WaitForSeconds (meleeCooldown); // Attack cooldown.
-		}
+		meleeAttack.SetActive (true); // Activates the attack.
+		yield return new WaitForSeconds (cooldown / 3);
+		meleeAttack.SetActive (false); // Deactivates the attack.
+		StopCoroutine (MeleeAttack(cooldown));
 	}
 
 }
