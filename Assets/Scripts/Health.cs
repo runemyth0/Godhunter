@@ -1,28 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-	public float healthPoints;
-	public float damagePoints;
+	public float maxHP;
+	public float dHP;
 
-	private float currentHealthPoints;
+	private float currentHP;
 
-	void Start ()
+	public GameObject bar;
+
+	private Slider healthBar;
+
+	void Awake ()
 	{
-		currentHealthPoints = healthPoints;
+		healthBar = bar.GetComponent<Slider>();
+		currentHP = maxHP;
+	}
+
+	void Update ()
+	{
+		healthBar.value = currentHP;
 	}
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		if (other.tag == "Attack")
 		{
-			currentHealthPoints -= damagePoints;
-			if (currentHealthPoints <= 0.0f)
+			changeHP (dHP);
+			if (currentHP <= 0.0f)
 			{
 				Destroy (gameObject);
 			}
 		}
+	}
+
+	void changeHP (float dHP)
+	{
+		currentHP += dHP;
 	}
 }

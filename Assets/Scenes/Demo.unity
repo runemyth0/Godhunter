@@ -593,8 +593,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minRange: 2
-  maxRange: 10
+  maxRange: 20
   moveSpeed: 3
+  meleeRange: 0
+  meleeCooldown: 0
+  enemyMelee: {fileID: 0}
 --- !u!114 &105095092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -606,8 +609,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa78df718dba8d4997c2aaa42fcf107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 20
-  damagePoints: 15
+  maxHP: 100
+  dHP: -10
+  bar: {fileID: 0}
 --- !u!1 &237483467
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,9 +1000,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 615261726}
+  - component: {fileID: 615261727}
   m_Layer: 0
   m_Name: EnemyMelee
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1017,6 +1022,31 @@ Transform:
   m_Father: {fileID: 105095089}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &615261727
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 615261725}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.1, y: 0.318187}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.2, y: 0.54545456}
+  m_EdgeRadius: 0
 --- !u!1 &672202000
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,7 +1059,7 @@ GameObject:
   - component: {fileID: 672202003}
   m_Layer: 0
   m_Name: EnemyMeleeMid
-  m_TagString: Untagged
+  m_TagString: Mid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1403,8 +1433,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa78df718dba8d4997c2aaa42fcf107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 100
-  damagePoints: 20
+  maxHP: 100
+  dHP: -15
+  bar: {fileID: 1728809105}
 --- !u!1 &1190690148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1878,6 +1909,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1728809106}
   - component: {fileID: 1728809107}
+  - component: {fileID: 1728809108}
   m_Layer: 5
   m_Name: Health Bar
   m_TagString: Untagged
@@ -1903,8 +1935,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -10}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchoredPosition: {x: 110, y: -20}
+  m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1728809107
 MonoBehaviour:
@@ -1954,6 +1986,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1728809108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1728809105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b9fc0d66030cbc4ea5efc42ea77afee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1906292157
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,8 +2199,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2101532690}
-  - component: {fileID: 2101532693}
-  - component: {fileID: 2101532692}
   - component: {fileID: 2101532691}
   m_Layer: 0
   m_Name: PlayerMelee
@@ -2182,8 +2223,8 @@ Transform:
   m_Father: {fileID: 1121894276}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &2101532691
-BoxCollider2D:
+--- !u!60 &2101532691
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -2194,7 +2235,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.8333333, y: -0.25}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2204,56 +2245,10 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6666667, y: 0.5}
-  m_EdgeRadius: 0
---- !u!61 &2101532692
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2101532689}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 1, y: 0.25}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.5}
-  m_EdgeRadius: 0
---- !u!61 &2101532693
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2101532689}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.8333333, y: 0.75}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6666667, y: 0.5}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.1670781, y: 0.99991006}
+      - {x: 0.5000345, y: 1.0000243}
+      - {x: 0.5002239, y: -0.4998207}
+      - {x: 1.1671126, y: -0.49982068}
+      - {x: 1.5011623, y: 0.24792221}
