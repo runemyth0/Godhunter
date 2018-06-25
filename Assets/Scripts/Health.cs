@@ -29,6 +29,10 @@ public class Health : MonoBehaviour
 		if (currentHP <= 0.0f)
 		{
 			alive = false;
+			if (this.gameObject.tag == "Enemy")
+			{
+				Destroy(bar);
+			}
 			Destroy(this.gameObject);
 		}
 	}
