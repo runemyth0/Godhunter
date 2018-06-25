@@ -24,9 +24,10 @@ GameObject:
   - component: {fileID: 58931169126407348}
   - component: {fileID: 114933735810498244}
   - component: {fileID: 114940019270524066}
+  - component: {fileID: 114404626062955140}
   m_Layer: 0
   m_Name: Pyrobolt
-  m_TagString: Attack
+  m_TagString: Ranged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,6 +80,18 @@ CircleCollider2D:
   m_Offset: {x: 6, y: 0}
   serializedVersion: 2
   m_Radius: 8
+--- !u!114 &114404626062955140
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1518898359832560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbba73c3db639a148801e01de7021864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dHP: 20
 --- !u!114 &114933735810498244
 MonoBehaviour:
   m_ObjectHideFlags: 1

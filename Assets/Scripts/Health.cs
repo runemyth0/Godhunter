@@ -6,16 +6,18 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
 	public float maxHP;
-	public float dHP;
 
-	private float currentHP;
+	public float currentHP;
 
 	public GameObject bar;
 
 	private Slider healthBar;
 
+	private bool alive;
+
 	void Awake ()
 	{
+		alive = true;
 		healthBar = bar.GetComponent<Slider>();
 		currentHP = maxHP;
 	}
@@ -23,21 +25,15 @@ public class Health : MonoBehaviour
 	void Update ()
 	{
 		healthBar.value = currentHP;
-	}
 
-	void OnTriggerEnter2D (Collider2D other)
-	{
-		if (other.tag == "Attack")
+		if (currentHP <= 0.0f)
 		{
-			changeHP (dHP);
-			if (currentHP <= 0.0f)
-			{
-				Destroy (gameObject);
-			}
+			alive = false;
+			Destroy(this.gameObject);
 		}
 	}
 
-	void changeHP (float dHP)
+	public void changeHP (float dHP)
 	{
 		currentHP += dHP;
 	}

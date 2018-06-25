@@ -610,7 +610,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 100
-  dHP: -10
   bar: {fileID: 337655553}
 --- !u!1 &199439985
 GameObject:
@@ -1153,9 +1152,10 @@ GameObject:
   m_Component:
   - component: {fileID: 615261726}
   - component: {fileID: 615261727}
+  - component: {fileID: 615261728}
   m_Layer: 0
   m_Name: EnemyMelee
-  m_TagString: Attack
+  m_TagString: Melee
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1199,6 +1199,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 0.54545456}
   m_EdgeRadius: 0
+--- !u!114 &615261728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 615261725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbba73c3db639a148801e01de7021864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dHP: 10
 --- !u!1 &672202000
 GameObject:
   m_ObjectHideFlags: 0
@@ -1595,7 +1607,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 100
-  dHP: -15
   bar: {fileID: 1728809105}
 --- !u!1 &1190690148
 GameObject:
@@ -2383,9 +2394,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2101532690}
   - component: {fileID: 2101532691}
+  - component: {fileID: 2101532692}
   m_Layer: 0
   m_Name: PlayerMelee
-  m_TagString: Attack
+  m_TagString: Melee
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2435,3 +2447,15 @@ PolygonCollider2D:
       - {x: 0.5002239, y: -0.4998207}
       - {x: 1.1671126, y: -0.49982068}
       - {x: 1.5011623, y: 0.24792221}
+--- !u!114 &2101532692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2101532689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbba73c3db639a148801e01de7021864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dHP: 15
