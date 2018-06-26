@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-	public float moveSpeed;
+	public float moveSpeedMax;
 	public float meleeCooldown;
 	public float fireCooldown;
 
 	private	float nextMelee;
 	private float nextFire;
+	private float moveSpeed;
 
 	public GameObject pyroAttack;
 	public Transform pyroSpawn;
@@ -18,10 +19,11 @@ public class PlayerController : MonoBehaviour
 
 	private Rigidbody2D rb;
 
-	void Start ()
+	void Awake ()
 	{
 		rb = GetComponent<Rigidbody2D>();
 		meleeAttack.SetActive (false);
+		moveSpeed = moveSpeedMax;
 	}
 
 	void Update ()
@@ -57,9 +59,11 @@ public class PlayerController : MonoBehaviour
 // Close range attack, hits all zones.
 	IEnumerator MeleeAttack (float cooldown)
 	{
+		moveSpeed = 0.0f;
 		meleeAttack.SetActive (true); // Activates the attack.
 		yield return new WaitForSeconds (cooldown / 3);
 		meleeAttack.SetActive (false); // Deactivates the attack.
+		moveSpeed = moveSpeedMax;
 		StopCoroutine (MeleeAttack(cooldown));
 	}
 
