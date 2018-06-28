@@ -13,7 +13,7 @@ public class Health : MonoBehaviour
 
 	private Slider healthBar;
 
-	private bool alive;
+	public bool alive;
 
 	void Awake ()
 	{
