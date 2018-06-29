@@ -23,9 +23,11 @@ GameObject:
   - component: {fileID: 50842588948490780}
   - component: {fileID: 58931169126407348}
   - component: {fileID: 114933735810498244}
+  - component: {fileID: 114940019270524066}
+  - component: {fileID: 114404626062955140}
   m_Layer: 0
   m_Name: Pyrobolt
-  m_TagString: Attack
+  m_TagString: Ranged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +40,7 @@ Transform:
   m_GameObject: {fileID: 1518898359832560}
   m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.075, y: 0.075, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -72,12 +74,24 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 6, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 8
+--- !u!114 &114404626062955140
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1518898359832560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbba73c3db639a148801e01de7021864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dHP: 20
 --- !u!114 &114933735810498244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,6 +104,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+--- !u!114 &114940019270524066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1518898359832560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c333bd87760c82348b98dcaed5716911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 2.5
 --- !u!212 &212563703300210354
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -125,8 +151,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ec9d9b1ba6975584b99d517146b5fece, type: 3}
-  m_Color: {r: 0.7735849, g: 0.49285167, b: 0.1788003, a: 1}
+  m_Sprite: {fileID: 21300000, guid: c8a6307493ef09a45a2ecfe929f49989, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

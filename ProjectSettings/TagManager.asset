@@ -9,6 +9,9 @@ TagManager:
   - Low
   - Attack
   - Floor
+  - Enemy
+  - Melee
+  - Ranged
   layers:
   - Default
   - TransparentFX

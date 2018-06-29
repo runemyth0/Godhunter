@@ -10,4 +10,5 @@ public class RangedRemover : MonoBehaviour
 	{
 		Destroy (gameObject,lifetime);
 	}
+
 }
